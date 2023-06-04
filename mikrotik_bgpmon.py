@@ -80,7 +80,8 @@ def check_bgp_sessions(router_ip, username, password, email_address=None):
             # Mikrotik seems to add this!
             if session_name[:-2] == connection_name:
                 session_exists = True
-                if session['established'] != "true":
+                session_established = session.get('established', '')
+                if session_established != "true":
                     alert_msg = f"Alert: BGP session {session_name} with {session_asn} is not established."
                     alerts.append(alert_msg)
                 break
