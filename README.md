@@ -28,3 +28,4 @@ The script needs a few things.  In the ```config.cfg``` you can specify the auth
 ````
 python3 mikrotik_bgpmon.py router_ip email_address
 ````
+If you don't supply an email address as a command line argument, it'll just print the alerts to the terminal, and not send an email.
