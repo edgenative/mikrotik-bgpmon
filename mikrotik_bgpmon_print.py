@@ -7,6 +7,7 @@
 # the ROS API, connect to the router and dump you a list of current BGP Sessions and tell you their
 # status.  The output can then be used for any number of your own systems.
 #
+
 import sys
 import configparser
 import routeros_api
@@ -17,13 +18,13 @@ parser = argparse.ArgumentParser()
 
 # add arguments to the parser
 parser.add_argument("router_ip", help="IP address or hostname of the router")
-parser.add_argument("session_state", help="Provide Session state, true = established, false = anything else")
+parser.add_argument("session_state", help="Provide Session state, true = established, false = connecting")
 # parse the arguments
 args = parser.parse_args()
 
 # access the values of the arguments
 ROUTER_IP = args.router_ip
-session_state = args.session_state
+session_state = args.session_state.lower()  # Convert to lowercase for case-insensitive comparison
 
 # Read from the config file
 # which contains the auth information
@@ -38,18 +39,19 @@ api = connection.get_api()
 
 # Get the current configuration from the router
 current_config_connection = api.get_resource('/routing/bgp/session')
-current_config_response = current_config_connection.get(established=session_state)
+current_config_response = current_config_connection.get()
 current_config_str = str(current_config_response)
 config_list = eval(current_config_str)
-
 for item in config_list:
     session_name = item.get('name')
     remote_as = item.get('remote.as')
     remote_address = item.get('remote.address')
     uptime = item.get('uptime')
-    session_state = item.get('established')
+    session_established = item.get('established')
+
     if session_state == "true":
-      session_state_name = "Established"
-    else:
-      session_state_name = "Connect"
-    print(f"Session: {session_name}, AS: {remote_as}, Peer IP: {remote_address}, Status: {session_state_name}, Uptime: {uptime}")
+        if session_established == "true":
+            print(f"Session: {session_name}, AS: {remote_as}, Peer IP: {remote_address}, Status: Established, Uptime: {uptime}")
+    elif session_state == "false":
+        if session_established != "true":
+            print(f"Session: {session_name}, AS: {remote_as}, Peer IP: {remote_address}, Status: Connecting, Uptime: {uptime}")
