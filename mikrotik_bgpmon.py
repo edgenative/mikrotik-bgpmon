@@ -43,7 +43,6 @@ smtp_username = config.get('ALERTS', 'smtp_username')
 smtp_password = config.get('ALERTS', 'smtp_password')
 
 def send_email(subject, message, recipient):
-
     # Create email message
     email_msg = MIMEText(message)
     email_msg['Subject'] = subject
@@ -71,23 +70,29 @@ def check_bgp_sessions(router_ip, username, password, email_address=None):
     for connection in configured_connections:
         connection_name = connection['name']
         connection_asn = connection.get('remote.as', 'Unknown')
+        connection_disabled = connection.get('disabled')
         session_exists = False
+
+        if connection_disabled == "true":
+            print(f"Skipping disabled connection: {connection_name}")
+            continue
+
+        session_found = False
 
         for session in configured_sessions:
             session_name = session['name']
             session_asn = session.get('remote.as', 'Unknown')
-            # Remove the last two characters (-1) from session_name for comparison since
-            # Mikrotik seems to add this!
+
             if session_name[:-2] == connection_name:
-                session_exists = True
+                session_found = True
                 session_established = session.get('established', '')
                 if session_established != "true":
                     alert_msg = f"Alert: BGP session {session_name} with {session_asn} is not established."
                     alerts.append(alert_msg)
                 break
 
-        if not session_exists:
-            alert_msg = f"Alert: BGP session {connection_name} with {connection_asn} is configured but not found in running sessions."
+        if not session_found:
+            alert_msg = f"Alert: BGP connection {connection_name} with {connection_asn} is configured but not found in running sessions."
             alerts.append(alert_msg)
 
     if email_address and alerts:
@@ -101,5 +106,6 @@ def check_bgp_sessions(router_ip, username, password, email_address=None):
             print(alert)
     else:
         print("No alerts generated.")
+
 
 check_bgp_sessions(router_ip, username, password, email_address)
