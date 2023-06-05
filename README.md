@@ -14,12 +14,12 @@ This script will look at configured (but _not_ disabled) peers under /routing/bg
 Example output;
 
 ```
+Skipping disabled connection: ipv6.sfmix.lg
 Alerts generated:
-Alert: BGP session ipv6.sfmix.lg with 12276 is configured but not found in running sessions.
-Alert: BGP session ipv4.sfmix.as8674 with 8674 is configured but not found in running sessions.
-Alert: BGP session ipv6.sfmix.as8674 with 8674 is configured but not found in running sessions.
-Alert: BGP session ipv4.sfmix.as21928 with 21928 is configured but not found in running sessions.
-Alert: BGP session ipv6.sfmix.as21928 with 21928 is configured but not found in running sessions.
+Alert: BGP connection ipv4.sfmix.as8674 with 8674 is configured but not found in running sessions.
+Alert: BGP connection ipv6.sfmix.as8674 with 8674 is configured but not found in running sessions.
+Alert: BGP connection ipv4.sfmix.as21928 with 21928 is configured but not found in running sessions.
+Alert: BGP connection ipv6.sfmix.as21928 with 21928 is configured but not found in running sessions.
 ````
 
 #### How do I run it?
