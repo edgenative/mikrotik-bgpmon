@@ -9,7 +9,7 @@ Mikrotik BGP Monitoring Scripts
 
 This script will help you monitor BGP sessions on your Mikrotik Routers, given Mikrotik is _STILL_ lacking BGP support in their SNMP implementation.  
 
-This script will look at configured peers under /routing/bgp/connection and compare them with the items under /routing/bgp/session to see if they match.  If they don't, an alert is created.  Seconly, it'll also look at the status of sessions under /routing/bgp/session and alert you of any status that isn't established.  If you specify an email address (and details in the config.cfg), it'll also send you an email with the output each time you run the script.
+This script will look at configured (but _not_ disabled) peers under /routing/bgp/connection and compare them with the items under /routing/bgp/session to see if they match.  If they don't, an alert is created.  Seconly, it'll also look at the status of sessions under /routing/bgp/session and alert you of any status that isn't established.  If you specify an email address (and details in the config.cfg), it'll also send you an email with the output each time you run the script.
 
 Example output;
 
