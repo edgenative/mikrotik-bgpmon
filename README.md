@@ -11,7 +11,7 @@ There are two scripts in this collection, which will help you monitor BGP sessio
 
 #### mikrotik_bgpmon.py
 
-This script will look at configured (but _not_ disabled) peers under /routing/bgp/connection and compare them with the items under /routing/bgp/session to see if they match.  If they don't, an alert is created.  Seconly, it'll also look at the status of sessions under /routing/bgp/session and alert you of any status that isn't established.  If you specify an email address (and details in the config.cfg), it'll also send you an email with the output each time you run the script.
+This script will look at configured (but _not_ disabled) peers under /routing/bgp/connection and compare them with the items under /routing/bgp/session to see if they match.  If they don't, an alert is created (Still not entirely sure I know why, _all_ things configured under /routing/bgp/connection don't appear in /routing/bgp/session).  Secondly, it'll also look at the status of sessions under /routing/bgp/session and alert you of any status that isn't established.  If you specify an email address (and details in the config.cfg), it'll also send you an email with the output each time you run the script.
 
 Example output;
 
