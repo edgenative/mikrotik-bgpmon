@@ -58,6 +58,6 @@ for item in config_list:
     prefix = item.get('prefix-count','Unknown')
     session_established = item.get('established','unknown')
     if session_state == "up" and session_established == "true":
-        print(f"Session: {session_name}, AS: {remote_as}, Peer IP: {remote_address}, Status: {session_established}, Uptime: {uptime}, Prefixes: {prefix}")
+        print(f"Session: {session_name}, AS: {remote_as}, Peer IP: {remote_address}, Established: {session_established}, Uptime: {uptime}, Prefixes: {prefix}")
     elif session_state == "down" and (session_established == "unknown"):
-        print(f"Session: {session_name}, AS: {remote_as}, Peer IP: {remote_address}, Status: Connecting, Uptime: {uptime}")
+        print(f"Session: {session_name}, AS: {remote_as}, Peer IP: {remote_address}, Established: false, Down: {uptime}")
