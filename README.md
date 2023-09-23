@@ -31,8 +31,8 @@ This script will display the sessions currently running on the router, and give 
 Example output;
 
 ```
-Session: ipv6.sfmix.rs1-1, AS: 63055, Peer IP: 2001:504:30::ba06:3055:1, Status: true, Uptime: 3h19m56s310ms, Prefixes: 55721
-Session: ipv4.sfmix.rs1-1, AS: 63055, Peer IP: 206.197.187.253, Status: true, Uptime: 3h19m56s310ms, Prefixes: 111222
+Session: ipv6.sfmix.rs1-1, AS: 63055, Peer IP: 2001:504:30::ba06:3055:1, Status: Established, Uptime: 3h19m56s310ms, Prefixes: 55721
+Session: ipv4.sfmix.rs1-1, AS: 63055, Peer IP: 206.197.187.253, Status: Established, Uptime: 3h19m56s310ms, Prefixes: 111222
 ```
 
 ### How do I run it?
