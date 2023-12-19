@@ -16,7 +16,9 @@ import configparser
 import routeros_api
 import argparse
 import smtplib
+import requests
 from email.mime.text import MIMEText
+from discord import SyncWebhook
 
 # Let's take some arguments on the command line
 parser = argparse.ArgumentParser()
@@ -41,6 +43,9 @@ smtp_server = config.get('ALERTS', 'smtp_server')
 smtp_port = config.get('ALERTS', 'smtp_port')
 smtp_username = config.get('ALERTS', 'smtp_username')
 smtp_password = config.get('ALERTS', 'smtp_password')
+discord_enable = config.get('DISCORD', 'enable')
+get_webhook = config.get('DISCORD', 'webhook')
+webhook = SyncWebhook.from_url(get_webhook)
 
 def send_email(subject, message, recipient):
     # Create email message
@@ -89,11 +94,15 @@ def check_bgp_sessions(router_ip, username, password, email_address=None):
                 if session_established != "true":
                     alert_msg = f"Alert: BGP session {session_name} with {session_asn} is not established."
                     alerts.append(alert_msg)
+                    if discord_enable == "true":
+                        webhook.send(alert_msg)
                 break
 
         if not session_found:
             alert_msg = f"Alert: BGP connection {connection_name} with {connection_asn} is configured but not found in running sessions."
             alerts.append(alert_msg)
+            if discord_enable == "true":
+                webhook.send(alert_msg)
 
     if email_address and alerts:
         subject = f"Mikrotik BGP Session Alerts [{router_ip}]"

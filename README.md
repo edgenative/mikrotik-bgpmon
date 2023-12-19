@@ -49,3 +49,14 @@ For the second script, you simply need to supply the router_ip and what status s
 python3 mikrotik_bgpmon_print.py router_ip up
 ```
 
+### Discord Logging
+
+This version has support for logging to a Discord guild channel. This now adds two additional dependencies to mikrotik-bgpmon - ```discord.py``` and ```requests``` which can be installed using Pip into the user that runs the script.
+
+To enable logging, you will need to [create a webhook URL](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks). Open ```config.cfg``` and set ```enabled = true```, then replace the ```<url>``` placeholder for the webhook variable with the created webhook URL. To disable logging, set ```enabled = false```.
+
+In order to effectively use this you may wish to setup a cron job which runs this script at a set interval such as once per minute. As above, if you don't want/need to receive e-mails, omit the ```<email_address>``` placeholder.
+
+```
+* * * * * python3 /path/to/mikrotik_bgpmon.py <router_ip> <email_address> >/dev/null 2>&1
+```
