@@ -60,3 +60,8 @@ In order to effectively use this you may wish to setup a cron job which runs thi
 ```
 * * * * * python3 /path/to/mikrotik_bgpmon.py <router_ip> <email_address> >/dev/null 2>&1
 ```
+
+### What Else?
+
+- This has been presented at a number of Internet fora, including EPF and Teraco Virtual Tech days -- a copy of the slides can be found at https://www.edgenative.net/teraco_virtual_techday_mikrotik_routing_security.pdf
+- You can make this better by adding features, as has been done with the Discord integration.  If it's useful to you, help make it better for others :-)
