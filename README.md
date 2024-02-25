@@ -3,7 +3,8 @@ Mikrotik BGP Monitoring Scripts
 
 ### Prerequisits
 
-[Mikrotik RouterOS API Python Packages](https://pypi.org/project/RouterOS-api/) and a Mikrotik Router(s) running BGP
+- [Mikrotik RouterOS API Python Packages](https://pypi.org/project/RouterOS-api/) installed on your host
+- Mikrotik API enabled, with SSL (Self-Signed cert is ok) on your router(s)
 
 ### What is this for?
 
